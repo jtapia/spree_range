@@ -1,0 +1,50 @@
+<%= render partial: 'spree/admin/shared/range_tabs', locals: { current: :categories } %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to(Spree.t(:new_category), spree.new_admin_range_category_url(@range), { class: "btn-success", icon: 'add', id: 'new_image_link' }) if can? :create, Spree::RangeCategory %>
+<% end %>
+
+<% has_categories = @range.has_range_categories? %>
+
+<% unless @range.range_categories.any? %>
+  <div class="alert alert-warning">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::RangeCategory)) %>.
+  </div>
+<% else %>
+  <table class="table sortable" data-hook="images_table">
+    <thead>
+      <tr data-hook="images_header">
+        <th>
+          <%= Spree.t(:thumbnail) %>
+        </th>
+        <th>
+          <%= Spree.t(:name) %>
+        </th>
+        <th>
+          <%= Spree.t(:description) %>
+        </th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% (@range.range_categories).each do |range_category| %>
+        <tr id="<%= spree_dom_id range_category %>" data-hook="categorys_row">
+          <td class='align-center'>
+            <%= image_tag range_category.range_category_image, class: 'img-responsive', style: 'width: 100px; height: auto;' %>
+          </td>
+          <td class='name'>
+            <%= range_category.name %>
+          </td>
+          <td class='description'>
+            <%= range_category.description %>
+          </td>
+          <td class="actions actions-2 text-right">
+            <%= link_to_with_icon('edit', Spree.t(:edit), spree.edit_admin_range_category_url(@range, range_category), class: 'btn btn-primary btn-sm', no_text: true, data: { action: 'edit' }) if can? :edit, range_category %>
+            <%= link_to_delete(range_category, { url: spree.admin_range_category_url(@range, range_category), no_text: true }) if can? :destroy, range_category %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

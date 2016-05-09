@@ -3,22 +3,14 @@
 
 module Spree
   class Range < Spree::Base
-    validates :name, :description, :available_on, presence: true
-    has_attached_file :image
-    validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
-
-    # use deleted? rather than checking the attribute directly. this
-    # allows extensions to override deleted? if they want to provide
-    # their own definition.
-    def deleted?
-      !!deleted_at
-    end
+    validates :name, :start_range, :end_range, :include_range, presence: true
+    has_many :range_categories
 
     # determine if brand is available.
     # deleted brands and brands with nil or future available_on date
     # are not available
     def available?
-      !(available_on.nil? || available_on.future?) && !deleted?
+      !(available_on.nil? || available_on.future?)
     end
 
     # determine if brand is active.
@@ -26,6 +18,10 @@ module Spree
     # are not active
     def active?
       active == true ? Spree.t(:active) : Spree.t(:disabled)
+    end
+
+    def has_range_categories?
+      range_categories.present?
     end
 
     def range_image

@@ -1,0 +1,12 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_resource, resource: Spree::Range.model_name.human) %>
+<% end %>
+<%= render partial: 'spree/admin/shared/range_tabs', locals: { current: '' } %>
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @range } %>
+
+<%= form_for [:admin, @range], method: :put, html: { multipart: true } do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

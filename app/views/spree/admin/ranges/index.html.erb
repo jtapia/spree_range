@@ -1,0 +1,70 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::Range) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_range), new_object_url, { class: 'btn-success', icon: 'add', id: 'admin_new_range' } %>
+<% end if can?(:create, Spree::Range) %>
+
+<% content_for :table_filter do %>
+  <div data-hook='admin_range_sidebar'>
+
+    <%= search_form_for [:admin, @search] do |f| %>
+      <% locals = { f: f } %>
+      <div data-hook='admin_range_index_search' class='row'>
+        <div class='col-md-6'>
+          <div class='form-group'>
+            <%= f.label :name_cont, Spree.t(:name) %>
+            <%= f.text_field :name_cont, size: 15, class: 'form-control js-quick-search-target' %>
+          </div>
+        </div>
+      </div>
+      <div data-hook='admin_range_index_search_buttons' class='form-actions'>
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
+
+<% if @collection.any? %>
+  <table class='table' id='listing_range'>
+    <thead>
+      <tr data-hook='admin_range_index_headers'>
+        <th>
+          <%= sort_link @search, :name, Spree.t(:name), { default_order: 'desc' }, { title: 'admin_range_listing_name_title' } %>
+        </th>
+        <th>
+          <%= Spree.t(:range_categories) %>
+        </th>
+        <th class='actions' data-hook='admin_range_index_header_actions'></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @collection.each do |range| %>
+        <tr id='<%= spree_dom_id range %>' data-hook='admin_range_index_rows' class='<%= cycle('odd', 'even') %>'>
+          <td class='name'>
+            <%= range.name %>
+          </td>
+          <td>
+            <% if range.has_range_categories? %>
+              <%= range.range_categories.map(&:name) %>
+            <% else %>
+              []
+            <% end %>
+          </td>
+          <td class='actions actions-2 text-right' data-hook='admin_range_index_row_actions'>
+            <%= link_to_edit range, no_text: true, class: 'edit' if can?(:edit, range) %>
+            <%= link_to_delete range, no_text: true if can?(:delete, range) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class='alert alert-info no-objects-found'>
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Range)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
