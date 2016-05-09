@@ -4,7 +4,7 @@ class AddSpreeRangesDataTable < ActiveRecord::Migration
       t.string    :name
       t.integer   :start_range
       t.integer   :end_range
-      t.integer   :include_range
+      t.string    :include_range, array: true
 
       t.timestamps
     end
