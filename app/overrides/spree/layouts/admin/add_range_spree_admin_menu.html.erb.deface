@@ -1,0 +1,7 @@
+<!-- insert_bottom "[data-hook='admin_tabs']" -->
+
+<% if can? :admin, Spree::Brand %>
+  <ul class="nav nav-sidebar">
+    <%= tab *Spree::BackendConfiguration::RANGES_TABS, url: spree.admin_ranges_path, icon: 'tags' %>
+  </ul>
+<% end %>
