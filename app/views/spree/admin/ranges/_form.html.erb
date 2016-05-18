@@ -26,7 +26,7 @@
   <div class='col-md-4' data-hook='admin_range_form_include_range'>
     <%= f.field_container :include_range, class: ['form-group'] do %>
       <%= f.label :include_range, raw(Spree.t(:include_range) + content_tag(:span, ' *', class: 'required')) %>
-      <%= f.text_field :include_range, class: 'form-control' %>
+      <%= f.text_field :include_range, class: 'form-control', value: (@range.include_range.join(', ') if @range.include_range?) %>
       <%= f.error_message_on :include_range %>
     <% end %>
   </div>

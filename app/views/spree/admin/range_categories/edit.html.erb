@@ -2,8 +2,6 @@
   <%= Spree.t(:editing_resource, resource: Spree::RangeCategory.model_name.human) %>
 <% end %>
 
-<%= render partial: 'spree/admin/shared/range_tabs', locals: { current: :categories } %>
-
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @range_category } %>
 
 <%= form_for @range_category, url: admin_range_category_path(@range, @range_category), html: { method: :put, multipart: true } do |f| %>

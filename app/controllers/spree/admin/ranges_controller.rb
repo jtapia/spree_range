@@ -4,7 +4,7 @@ module Spree
       include Spree::Admin::BaseHelper
       rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
-      before_action :load_range, only: [:edit, :destroy]
+      before_action :load_range, only: [:update, :edit, :destroy]
 
       def index
         respond_with(@collection)
@@ -12,11 +12,26 @@ module Spree
 
       def create
         @range = Spree::Range.new(range_params)
+        set_include_ranges
+
         if @range.save
           flash.now[:success] = flash_message_for(@range, :successfully_created)
           render :edit
         else
           render :new
+        end
+      end
+
+      def update
+        @range.assign_attributes(range_params)
+        set_include_ranges
+
+        if @range.save
+          flash[:success] = Spree.t('notice_messages.range_updated')
+          redirect_to admin_ranges_path
+        else
+          flash[:error] = Spree.t('notice_messages.range_not_updated')
+          render :edit
         end
       end
 
@@ -44,8 +59,8 @@ module Spree
           :name,
           :start_range,
           :end_range,
-          :include_range,
-          :image
+          :image,
+          :include_range
         ]
       end
 
@@ -62,6 +77,12 @@ module Spree
         @collection = @search.result.
               page(params[:page]).
               per(Spree::Config[:properties_per_page])
+      end
+
+      def set_include_ranges
+        if range_params[:include_range]
+          @range.include_range = range_params[:include_range].split(',')
+        end
       end
 
     end

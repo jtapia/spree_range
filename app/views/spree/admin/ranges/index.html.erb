@@ -35,6 +35,9 @@
           <%= sort_link @search, :name, Spree.t(:name), { default_order: 'desc' }, { title: 'admin_range_listing_name_title' } %>
         </th>
         <th>
+          <%= Spree.t(:include_range) %>
+        </th>
+        <th>
           <%= Spree.t(:range_categories) %>
         </th>
         <th class='actions' data-hook='admin_range_index_header_actions'></th>
@@ -47,9 +50,12 @@
           <td class='name'>
             <%= range.name %>
           </td>
+          <td class='include_range'>
+            <%= range.include_range.join(', ') %>
+          </td>
           <td>
             <% if range.has_range_categories? %>
-              <%= range.range_categories.map(&:name) %>
+              <%= range.range_categories.map(&:name).join(', ') %>
             <% else %>
               []
             <% end %>
