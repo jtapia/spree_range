@@ -1,6 +1,8 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::Range.model_name.human) %>
+  <%= link_to Spree.t(:ranges), admin_ranges_path %> /
+  <%= @range.name %>
 <% end %>
+
 <%= render partial: 'spree/admin/shared/range_tabs', locals: { current: '' } %>
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @range } %>
 

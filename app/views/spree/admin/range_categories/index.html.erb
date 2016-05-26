@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= link_to Spree.t(:range), admin_ranges_path %> /
+  <%= link_to Spree.t(:range), edit_admin_range_path(@range) %> /
   <%= @range.name %>
 <% end %>
 

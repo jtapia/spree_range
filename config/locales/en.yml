@@ -12,6 +12,7 @@ en:
     start_range: Start Range
     end_range: End Range
     include_range: Include Range
+    editing_resource: Editing %{resource}
     actions:
       create: Create
     notice_messages:
@@ -21,3 +22,14 @@ en:
       range_not_deleted:  Something went wrong, please try it again
       range_category_deleted: The range category has been removed
       range_category_not_deleted: Something went wrong, please try it again
+    admin:
+      tab:
+        range: Range
+        ranges: Ranges
+    models:
+      spree/range:
+        one: Range
+        other: Ranges
+      spree/range_category:
+        one: Range Category
+        other: Range Categories

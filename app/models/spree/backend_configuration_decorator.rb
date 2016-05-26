@@ -1,3 +1,3 @@
 Spree::BackendConfiguration.class_eval do
-  RANGE_TABS ||= [:range]
+  RANGE_TABS ||= [:ranges]
 end
