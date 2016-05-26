@@ -2,4 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  spree:
+    range: Range
+    ranges: Ranges
+    new_range: New Range
+    category: Category
+    categories: Categories
+    new_category: New Category
+    start_range: Start Range
+    end_range: End Range
+    include_range: Include Range
+    actions:
+      create: Create
+    notice_messages:
+      range_updated: The range has been updated
+      range_not_updated: Something went wrong, please try it again
+      range_deleted: The range has been deleted
+      range_not_deleted:  Something went wrong, please try it again
+      range_category_deleted: The range category has been removed
+      range_category_not_deleted: Something went wrong, please try it again

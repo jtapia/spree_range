@@ -1,0 +1,20 @@
+es:
+  spree:
+    range: Rango
+    ranges: Rangos
+    new_range: Nuevo Rango
+    category: Categoria
+    categories: Categorias
+    new_category: Nueva Categoria
+    start_range: Inicio Rango
+    end_range: Final Rango
+    include_range: Incluye Rango
+    actions:
+      create: Crear
+    notice_messages:
+      range_updated: El rango fue actualizado correctamente
+      range_not_updated: Se ha presentado un error, por favor intentalo otra vez
+      range_deleted: El rango a sido eliminado correctamente
+      range_not_deleted: Se ha presentado un error, por favor intentalo otra vez
+      range_category_deleted: La categoria ha sido eliminado correctamente
+      range_category_not_deleted: Se ha presentado un error, por favor intentalo otra vez
