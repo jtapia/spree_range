@@ -7,7 +7,6 @@ module Spree
       before_action :load_range_category, only: [:edit, :destroy]
 
       def create
-        binding.pry
         @range_category = @range.range_categories.new(range_category_params)
         if @range_category.save
           flash.now[:success] = flash_message_for(@range_category, :successfully_created)
