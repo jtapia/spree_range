@@ -34,7 +34,7 @@
       <% (@range.range_categories).each do |range_category| %>
         <tr id="<%= spree_dom_id range_category %>" data-hook="categorys_row">
           <td class='align-center'>
-            <%= image_tag range_category.range_category_image, class: 'img-responsive', style: 'width: 100px; height: auto;' %>
+            <%= image_tag range_category.image, class: 'img-responsive', style: 'width: 100px; height: auto;' %>
           </td>
           <td class='name'>
             <%= range_category.name %>
